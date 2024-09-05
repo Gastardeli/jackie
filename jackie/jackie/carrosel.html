@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Imagens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .carrossel {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+        .imagens {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .imagem {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .botao {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .botao-esquerda {
+            left: 10px;
+        }
+        .botao-direita {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="carrossel">
+        <div class="imagens">
+            <img src="https://via.placeholder.com/600x300/FF5733/FFFFFF?text=Imagem+1" class="imagem" alt="Imagem 1">
+            <img src="https://via.placeholder.com/600x300/33FF57/FFFFFF?text=Imagem+2" class="imagem" alt="Imagem 2">
+            <img src="https://via.placeholder.com/600x300/3357FF/FFFFFF?text=Imagem+3" class="imagem" alt="Imagem 3">
+        </div>
+        <button class="botao botao-esquerda" onclick="mover(-1)">&#10094;</button>
+        <button class="botao botao-direita" onclick="mover(1)">&#10095;</button>
+    </div>
+
+    <script>
+        let indice = 0;
+
+        function mover(direcao) {
+            const imagens = document.querySelector('.imagens');
+            const totalImagens = document.querySelectorAll('.imagem').length;
+            indice += direcao;
+
+            if (indice < 0) {
+                indice = totalImagens - 1;
+            } else if (indice >= totalImagens) {
+                indice = 0;
+            }
+
+            const deslocamento = -indice * 100;
+            imagens.style.transform = `translateX(${deslocamento}%)`;
+        }
+    </script>
+
+</body>
+</html>
